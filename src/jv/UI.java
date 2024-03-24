@@ -5,7 +5,10 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -69,6 +72,7 @@ public class UI extends JFrame implements ActionListener {
 		aboutApp.addActionListener(this);
 		close.addActionListener(this);
 		openFile.addActionListener(this);
+		saveFile.addActionListener(this);
 		
 		container.add(menuBar, BorderLayout.NORTH);
 	}
@@ -90,6 +94,22 @@ public class UI extends JFrame implements ActionListener {
 					System.out.println(ex.getMessage());
 				}
 			}	
+		}
+		else if (e.getSource() == saveFile) {
+			JFileChooser save = new JFileChooser();
+			int option = save.showSaveDialog(this);
+			if (option == JFileChooser.APPROVE_OPTION) {
+				try {
+					File file = save.getSelectedFile();
+					setTitle(file.getName() + " | " + Main.NAME);
+					BufferedWriter out = new BufferedWriter(new FileWriter(file.getPath()));
+					out.write(textArea.getText());
+					out.close();
+				}
+				catch (Exception ex){
+					System.out.println(ex.getMessage());
+				}
+			}
 		}
 		else if (e.getSource() == close) {
 			this.dispose();
