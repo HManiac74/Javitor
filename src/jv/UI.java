@@ -17,8 +17,8 @@ public class UI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private Container container;
 	private JTextArea textArea;
-	private JMenu menuFile;
-	private JMenuItem openFile, saveFile, close;
+	private JMenu menuFile, menuFind;
+	private JMenuItem openFile, saveFile, close, find;
 	private JMenuBar menuBar;
 	
 	public UI() {
@@ -35,17 +35,21 @@ public class UI extends JFrame implements ActionListener {
 		getContentPane().add(textArea);
 		
 		menuFile = new JMenu("File");
+		menuFind = new JMenu("Find");
 		
 		openFile = new JMenuItem("Open");
 		saveFile = new JMenuItem("Save");
 		close = new JMenuItem("Close");
+		find = new JMenuItem("Find");
 		
 		menuFile.add(openFile);
 		menuFile.add(saveFile);
 		menuFile.add(close);
+		menuFind.add(find);
 		
 		menuBar = new JMenuBar();
 		menuBar.add(menuFile);
+		menuBar.add(menuFind);
 		
 		container.add(menuBar, BorderLayout.NORTH);
 	}
