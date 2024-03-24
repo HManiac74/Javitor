@@ -11,6 +11,7 @@ public class About {
 	private JPanel panel;
 	private JFrame frame;
 	private JLabel text;
+	private String contentText;
 
 	public About() {
 		panel = new JPanel(new FlowLayout());
@@ -19,6 +20,33 @@ public class About {
 		frame.setVisible(true);
 		frame.setSize(300, 300);
 		text = new JLabel();
+	}
+	
+	protected void me() {
+		frame.setTitle("About the author - " + Main.NAME);
+		contentText = 
+				"<html><body><p>"
+				+ "Author: hmaniac28 <br />"
+				+ "Contact me at: "
+				+ "<a href='mailto:" + Main.EMAIL + "?subject=About Javitor'>" + Main.EMAIL + "</a>"
+				+ "</p></body></html>";
+		text.setText(contentText);
+		panel.add(text);
+		frame.add(panel);
+	}
+	
+	protected void software() {
+frame.setTitle("About the software - " + Main.NAME);
+		
+		contentText = 
+		"<html><body><p>" +		
+		"Name: " + Main.NAME + "<br />" +
+		"Version: " + Main.VERSION + 
+		"</p></body></html>";
+		
+		text.setText(contentText);
+		panel.add(text);
+		frame.add(panel);
 	}
 
 }

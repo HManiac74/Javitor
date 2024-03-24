@@ -57,12 +57,20 @@ public class UI extends JFrame implements ActionListener {
 		menuBar.add(menuFind);
 		menuBar.add(menuAbout);
 		
+		aboutMe.addActionListener(this);
+		aboutApp.addActionListener(this);
+		
 		container.add(menuBar, BorderLayout.NORTH);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == aboutMe) {
+			new About().me();
+		}
+		else if (e.getSource() == aboutApp) {
+			new About().software();
+		}
 
 	}
 
