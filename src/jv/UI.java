@@ -64,13 +64,17 @@ public class UI extends JFrame implements ActionListener {
 		//bind action listener
 		aboutMe.addActionListener(this);
 		aboutApp.addActionListener(this);
+		close.addActionListener(this);
 		
 		container.add(menuBar, BorderLayout.NORTH);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == aboutMe) {
+		if (e.getSource() == close) {
+			this.dispose();
+		}
+		else if (e.getSource() == aboutMe) {
 			new About().me();
 		}
 		else if (e.getSource() == aboutApp) {
