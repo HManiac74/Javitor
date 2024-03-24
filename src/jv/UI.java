@@ -5,7 +5,10 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileReader;
+import java.util.Scanner;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -65,13 +68,30 @@ public class UI extends JFrame implements ActionListener {
 		aboutMe.addActionListener(this);
 		aboutApp.addActionListener(this);
 		close.addActionListener(this);
+		openFile.addActionListener(this);
 		
 		container.add(menuBar, BorderLayout.NORTH);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == close) {
+		if (e.getSource() == openFile) {
+			JFileChooser open = new JFileChooser();
+			int option = open.showOpenDialog(this);
+			if (option == JFileChooser.APPROVE_OPTION) {
+				textArea.setText(" ");
+				try {
+					Scanner scan = new Scanner(new FileReader(open.getSelectedFile().getPath()));
+					while (scan.hasNext())
+						textArea.append(scan.nextLine() + "\n");
+					scan.close();
+				}
+				catch (Exception ex) {
+					System.out.println(ex.getMessage());
+				}
+			}	
+		}
+		else if (e.getSource() == close) {
 			this.dispose();
 		}
 		else if (e.getSource() == aboutMe) {
