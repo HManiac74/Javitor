@@ -34,10 +34,12 @@ public class UI extends JFrame implements ActionListener {
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(textArea);
 		
+		//menus
 		menuFile = new JMenu("File");
 		menuFind = new JMenu("Find");
 		menuAbout = new JMenu("About");
 		
+		//menu items
 		openFile = new JMenuItem("Open");
 		saveFile = new JMenuItem("Save");
 		close = new JMenuItem("Close");
@@ -45,6 +47,7 @@ public class UI extends JFrame implements ActionListener {
 		aboutMe = new JMenuItem("About the author");
 		aboutApp = new JMenuItem("About the software");
 		
+		//add menu items to menus
 		menuFile.add(openFile);
 		menuFile.add(saveFile);
 		menuFile.add(close);
@@ -52,11 +55,13 @@ public class UI extends JFrame implements ActionListener {
 		menuAbout.add(aboutMe);
 		menuAbout.add(aboutApp);
 		
+		//add menus to menu bar
 		menuBar = new JMenuBar();
 		menuBar.add(menuFile);
 		menuBar.add(menuFind);
 		menuBar.add(menuAbout);
 		
+		//bind action listener
 		aboutMe.addActionListener(this);
 		aboutApp.addActionListener(this);
 		

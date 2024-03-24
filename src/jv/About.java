@@ -21,29 +21,29 @@ public class About {
 		frame.setSize(300, 300);
 		text = new JLabel();
 	}
-	
+
 	protected void me() {
 		frame.setTitle("About the author - " + Main.NAME);
 		contentText = 
 				"<html><body><p>"
-				+ "Author: hmaniac28 <br />"
-				+ "Contact me at: "
-				+ "<a href='mailto:" + Main.EMAIL + "?subject=About Javitor'>" + Main.EMAIL + "</a>"
-				+ "</p></body></html>";
+						+ "Author: hmaniac28 <br />"
+						+ "Contact me at: "
+						+ "<a href='mailto:" + Main.EMAIL + "?subject=About Javitor'>" + Main.EMAIL + "</a>"
+						+ "</p></body></html>";
 		text.setText(contentText);
 		panel.add(text);
 		frame.add(panel);
 	}
-	
+
 	protected void software() {
-frame.setTitle("About the software - " + Main.NAME);
-		
+		frame.setTitle("About the software - " + Main.NAME);
+
 		contentText = 
-		"<html><body><p>" +		
-		"Name: " + Main.NAME + "<br />" +
-		"Version: " + Main.VERSION + 
-		"</p></body></html>";
-		
+				"<html><body><p>" +		
+						"Name: " + Main.NAME + "<br />" +
+						"Version: " + Main.VERSION + 
+						"</p></body></html>";
+
 		text.setText(contentText);
 		panel.add(text);
 		frame.add(panel);
