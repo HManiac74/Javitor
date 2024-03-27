@@ -73,6 +73,7 @@ public class UI extends JFrame implements ActionListener {
 		close.addActionListener(this);
 		openFile.addActionListener(this);
 		saveFile.addActionListener(this);
+		find.addActionListener(this);
 		
 		container.add(menuBar, BorderLayout.NORTH);
 	}
@@ -110,6 +111,9 @@ public class UI extends JFrame implements ActionListener {
 					System.out.println(ex.getMessage());
 				}
 			}
+		}
+		else if (e.getSource() == find) {
+			new Find(textArea);
 		}
 		else if (e.getSource() == close) {
 			this.dispose();
