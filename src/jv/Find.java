@@ -58,6 +58,10 @@ public class Find extends JFrame implements ActionListener {
         add(findNext);
         findNext.addActionListener(this);
 
+        replace.setBounds(225, 50, 115, 20);
+        add(replace);
+        replace.addActionListener(this);
+
 
         //set window size
         int width = 360;
@@ -101,7 +105,13 @@ public class Find extends JFrame implements ActionListener {
     }
 
     private void replace() {
-
+        try {
+            find();
+            txt.replaceSelection(textR.getText());
+        }
+        catch (NullPointerException e) {
+            System.out.println("Null Pointer Exception: " + e);
+        }
     }
 
     private void findNext() {
