@@ -99,13 +99,7 @@ public class Find extends JFrame implements ActionListener {
      
 
     private void replaceAll() {
-        try {
-            find();
-            txt.replaceSelection(textR.getText());
-        }
-        catch(NullPointerException e) {
-            System.out.println("Null Pointer Exception: " + e);
-        }
+        txt.setText(txt.getText().replaceAll(textF.getText(), textR.getText()));
     }
 
     private void replace() {
