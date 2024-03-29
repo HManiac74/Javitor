@@ -66,6 +66,10 @@ public class Find extends JFrame implements ActionListener {
         add(replaceAll);
         replaceAll.addActionListener(this);
 
+        cancel.setBounds(225, 94, 115, 20);
+        add(cancel);
+        cancel.addActionListener(this);
+
 
         //set window size
         int width = 360;
