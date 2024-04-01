@@ -5,30 +5,22 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.io.*;
 import java.util.Scanner;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class UI extends JFrame implements ActionListener {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
-	private Container container;
-	private JTextArea textArea;
-	private JMenu menuFile, menuFind, menuAbout;
-	private JMenuItem openFile, saveFile, close, find, aboutMe, aboutApp;
-	private JMenuBar menuBar;
-	
-	public UI() {
-		container = getContentPane();
+    private final JTextArea textArea;
+    private final JMenuItem openFile, saveFile, close, find, aboutMe, aboutApp;
+
+    public UI() {
+        Container container = getContentPane();
 		
 		setSize(500, 300);
 		setTitle("Untitled");
@@ -41,9 +33,9 @@ public class UI extends JFrame implements ActionListener {
 		getContentPane().add(textArea);
 		
 		//menus
-		menuFile = new JMenu("File");
-		menuFind = new JMenu("Find");
-		menuAbout = new JMenu("About");
+        JMenu menuFile = new JMenu("File");
+        JMenu menuFind = new JMenu("Find");
+        JMenu menuAbout = new JMenu("About");
 		
 		//menu items
 		openFile = new JMenuItem("Open");
@@ -62,7 +54,7 @@ public class UI extends JFrame implements ActionListener {
 		menuAbout.add(aboutApp);
 		
 		//add menus to menu bar
-		menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
 		menuBar.add(menuFile);
 		menuBar.add(menuFind);
 		menuBar.add(menuAbout);
@@ -74,6 +66,12 @@ public class UI extends JFrame implements ActionListener {
 		openFile.addActionListener(this);
 		saveFile.addActionListener(this);
 		find.addActionListener(this);
+
+		//set keyoard shortcuts
+		openFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
+		saveFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.CTRL_DOWN_MASK));
+		find.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
 		
 		container.add(menuBar, BorderLayout.NORTH);
 	}
