@@ -23,7 +23,7 @@ public class UI extends JFrame implements ActionListener {
         Container container = getContentPane();
 		
 		setSize(500, 300);
-		setTitle("Untitled " + Main.NAME);
+		setTitle("Untitled " + SimpleJavaTextEditor.NAME);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		textArea = new JTextArea("", 0, 0);
