@@ -17,13 +17,13 @@ public class UI extends JFrame implements ActionListener {
 	@Serial
 	private static final long serialVersionUID = 1L;
     private final JTextArea textArea;
-    private final JMenuItem openFile, saveFile, close, find, aboutMe, aboutApp;
+    private final JMenuItem openFile, saveFile, close, find, aboutMe, aboutApp, clearFile, newFile;
 
     public UI() {
         Container container = getContentPane();
 		
 		setSize(500, 300);
-		setTitle("Untitled");
+		setTitle("Untitled " + Main.NAME);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		textArea = new JTextArea("", 0, 0);
@@ -35,27 +35,33 @@ public class UI extends JFrame implements ActionListener {
 		//menus
         JMenu menuFile = new JMenu("File");
         JMenu menuFind = new JMenu("Find");
+		JMenu menuEdit = new JMenu("Edit");
         JMenu menuAbout = new JMenu("About");
 		
 		//menu items
 		openFile = new JMenuItem("Open");
 		saveFile = new JMenuItem("Save");
 		close = new JMenuItem("Close");
+		clearFile = new JMenuItem("Clear");
 		find = new JMenuItem("Find");
 		aboutMe = new JMenuItem("About the author");
 		aboutApp = new JMenuItem("About the software");
+		newFile = new JMenuItem("New");
 		
 		//add menu items to menus
+		menuFile.add(newFile);
 		menuFile.add(openFile);
 		menuFile.add(saveFile);
 		menuFile.add(close);
 		menuFind.add(find);
 		menuAbout.add(aboutMe);
 		menuAbout.add(aboutApp);
+		menuEdit.add(clearFile);
 		
 		//add menus to menu bar
         JMenuBar menuBar = new JMenuBar();
 		menuBar.add(menuFile);
+		menuBar.add(menuEdit);
 		menuBar.add(menuFind);
 		menuBar.add(menuAbout);
 		
@@ -66,12 +72,16 @@ public class UI extends JFrame implements ActionListener {
 		openFile.addActionListener(this);
 		saveFile.addActionListener(this);
 		find.addActionListener(this);
+		clearFile.addActionListener(this);
+		newFile.addActionListener(this);
 
 		//set keyoard shortcuts
 		openFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
 		saveFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
 		close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.CTRL_DOWN_MASK));
 		find.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
+		newFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+		clearFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK));
 		
 		container.add(menuBar, BorderLayout.NORTH);
 	}
@@ -121,6 +131,12 @@ public class UI extends JFrame implements ActionListener {
 		}
 		else if (e.getSource() == aboutApp) {
 			new About().software();
+		}
+		else if (e.getSource() == clearFile) {
+			FEdit.clear(textArea);
+		}
+		else if (e.getSource() == newFile) {
+			FEdit.clear(textArea);
 		}
 
 	}

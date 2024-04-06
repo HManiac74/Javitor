@@ -13,5 +13,4 @@ public class SimpleJavaTextEditor extends JTextPane{
 		new UI().setVisible(true);
 
 	}
-
 }

@@ -162,4 +162,3 @@ public class Find extends JFrame implements ActionListener {
     }
 
 } 
-
