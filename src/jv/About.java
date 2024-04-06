@@ -23,12 +23,12 @@ public class About {
 	}
 
 	protected void me() {
-		frame.setTitle("About the author - " + Main.NAME);
+		frame.setTitle("About the author - " + SimpleJavaTextEditor.NAME);
 		contentText = 
 				"<html><body><p>"
 						+ "Author: hmaniac28 <br />"
 						+ "Contact me at: "
-						+ "<a href='mailto:" + Main.EMAIL + "?subject=About Javitor'>" + Main.EMAIL + "</a>"
+						+ "<a href='mailto:" + SimpleJavaTextEditor.EMAIL + "?subject=About Javitor'>" + SimpleJavaTextEditor.EMAIL + "</a>"
 						+ "</p></body></html>";
 		text.setText(contentText);
 		panel.add(text);
@@ -36,12 +36,12 @@ public class About {
 	}
 
 	protected void software() {
-		frame.setTitle("About the software - " + Main.NAME);
+		frame.setTitle("About the software - " + SimpleJavaTextEditor.NAME);
 
 		contentText = 
 				"<html><body><p>" +		
-						"Name: " + Main.NAME + "<br />" +
-						"Version: " + Main.VERSION + 
+						"Name: " + SimpleJavaTextEditor.NAME + "<br />" +
+						"Version: " + SimpleJavaTextEditor.VERSION + 
 						"</p></body></html>";
 
 		text.setText(contentText);

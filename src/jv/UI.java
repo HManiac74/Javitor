@@ -100,7 +100,7 @@ public class UI extends JFrame implements ActionListener {
 			if (option == JFileChooser.APPROVE_OPTION) {
 				try {
 					File file = save.getSelectedFile();
-					setTitle(file.getName() + " | " + Main.NAME);
+					setTitle(file.getName() + " | " + SimpleJavaTextEditor.NAME);
 					BufferedWriter out = new BufferedWriter(new FileWriter(file.getPath()));
 					out.write(textArea.getText());
 					out.close();

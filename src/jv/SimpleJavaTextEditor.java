@@ -2,7 +2,7 @@ package jv;
 
 import javax.swing.JTextPane;
 
-public class Main extends JTextPane{
+public class SimpleJavaTextEditor extends JTextPane{
 
 	private static final long serialVersionUID = 1L;
 	protected final static String EMAIL = "hmaniac28@yahoo.de";
