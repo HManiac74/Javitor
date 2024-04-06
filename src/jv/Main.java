@@ -13,5 +13,4 @@ public class Main extends JTextPane{
 		new UI().setVisible(true);
 
 	}
-
 }
