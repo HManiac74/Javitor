@@ -18,6 +18,16 @@ public class UI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
     private final JTextArea textArea;
     private final JMenuItem openFile, saveFile, close, find, aboutMe, aboutApp, clearFile, newFile;
+    
+    //Menu Item Icons
+    private final ImageIcon newIcon = new ImageIcon("icons/new.png");
+    private final ImageIcon openIcon = new ImageIcon("icons/open.png");
+    private final ImageIcon saveIcon = new ImageIcon("icons/save.png");
+    private final ImageIcon closeIcon = new ImageIcon("icons/close.png");
+    private final ImageIcon clearIcon = new ImageIcon("icons/clear.png");
+    private final ImageIcon findIcon = new ImageIcon("icons/find.png");
+    private final ImageIcon aboutMeIcon = new ImageIcon("icons/about_me.png");
+    private final ImageIcon aboutIcon = new ImageIcon("icons/about.png");
 
     public UI() {
         Container container = getContentPane();
@@ -39,14 +49,14 @@ public class UI extends JFrame implements ActionListener {
         JMenu menuAbout = new JMenu("About");
 		
 		//menu items
-		openFile = new JMenuItem("Open");
-		saveFile = new JMenuItem("Save");
-		close = new JMenuItem("Close");
-		clearFile = new JMenuItem("Clear");
-		find = new JMenuItem("Find");
-		aboutMe = new JMenuItem("About the author");
-		aboutApp = new JMenuItem("About the software");
-		newFile = new JMenuItem("New");
+		openFile = new JMenuItem("Open", openIcon);
+		saveFile = new JMenuItem("Save", saveIcon);
+		close = new JMenuItem("Close", closeIcon);
+		clearFile = new JMenuItem("Clear", clearIcon);
+		find = new JMenuItem("Find", findIcon);
+		aboutMe = new JMenuItem("About the author", aboutMeIcon);
+		aboutApp = new JMenuItem("About the software", aboutIcon);
+		newFile = new JMenuItem("New", newIcon);
 		
 		//add menu items to menus
 		menuFile.add(newFile);
