@@ -1,7 +1,6 @@
 package jv;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +10,7 @@ import java.io.*;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class UI extends JFrame implements ActionListener {
 
@@ -28,9 +28,10 @@ public class UI extends JFrame implements ActionListener {
     private final ImageIcon findIcon = new ImageIcon("icons/find.png");
     private final ImageIcon aboutMeIcon = new ImageIcon("icons/about_me.png");
     private final ImageIcon aboutIcon = new ImageIcon("icons/about.png");
+    private final JToolBar mainToolbar;
+    JButton newButton, openButton, saveButton, clearButton, quickButton, aboutMeButton,aboutButton, closeButton, spaceButton1, spaceButton2;
 
     public UI() {
-        Container container = getContentPane();
 
         setSize(500, 300);
         setTitle("Untitled " + SimpleJavaTextEditor.NAME);
@@ -92,13 +93,72 @@ public class UI extends JFrame implements ActionListener {
         find.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
         newFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
         clearFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK));
+        
+        mainToolbar = new JToolBar();
+        this.add(mainToolbar, BorderLayout.NORTH);
+        Border emptyBorder = BorderFactory.createEmptyBorder(0, 0, 0, 50);
+        
+        newButton = new JButton(newIcon);
+        newButton.setToolTipText("New");
+        newButton.addActionListener(this);
+        mainToolbar.add(newButton);
+        mainToolbar.addSeparator();
+        
+        openButton = new JButton(openIcon);
+        openButton.setToolTipText("Open");
+        openButton.addActionListener(this);
+        mainToolbar.add(openButton);
+        mainToolbar.addSeparator();
+        
+        saveButton = new JButton(saveIcon);
+        saveButton.setToolTipText("Save");
+        saveButton.addActionListener(this);
+        mainToolbar.add(saveButton);
+        mainToolbar.addSeparator();
+        
+        clearButton = new JButton(clearIcon);
+        clearButton.setToolTipText("Clear All");
+        clearButton.addActionListener(this);
+        mainToolbar.add(clearButton);
+        mainToolbar.addSeparator();
+        
+        quickButton = new JButton(findIcon);
+        quickButton.setToolTipText("Find");
+        quickButton.addActionListener(this);
+        mainToolbar.add(quickButton);
+        mainToolbar.addSeparator();
+        
+        spaceButton1 = new JButton();
+        spaceButton1.setBorder(emptyBorder);
+        mainToolbar.add(spaceButton1);
+        
+        aboutMeButton = new JButton(aboutMeIcon);
+        aboutMeButton.setToolTipText("About Me");
+        aboutMeButton.addActionListener(this);
+        mainToolbar.add(aboutMeButton);
+        mainToolbar.addSeparator();
+        
+        aboutButton = new JButton(aboutIcon);
+        aboutButton.setToolTipText("About The Software");
+        aboutButton.addActionListener(this);
+        mainToolbar.add(aboutButton);
+        mainToolbar.addSeparator();
+        
+        spaceButton2 = new JButton();
+        spaceButton2.setBorder(emptyBorder);
+        mainToolbar.add(spaceButton2);
+        
+        closeButton = new JButton(closeIcon);
+        closeButton.setToolTipText("Close");
+        closeButton.addActionListener(this);
+        mainToolbar.add(closeButton);
 
-        container.add(menuBar, BorderLayout.NORTH);
+        this.setJMenuBar(menuBar);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == openFile) {
+        if (e.getSource() == openFile || e.getSource() == openButton) {
             JFileChooser open = new JFileChooser();
             int option = open.showOpenDialog(this);
             if (option == JFileChooser.APPROVE_OPTION) {
@@ -109,11 +169,11 @@ public class UI extends JFrame implements ActionListener {
                         textArea.append(scan.nextLine() + "\n");
                     }
                     scan.close();
-                } catch (Exception ex) {
+                } catch (FileNotFoundException ex) {
                     System.out.println(ex.getMessage());
                 }
             }
-        } else if (e.getSource() == saveFile) {
+        } else if (e.getSource() == saveFile || e.getSource() == saveButton) {
             JFileChooser save = new JFileChooser();
             int option = save.showSaveDialog(this);
             if (option == JFileChooser.APPROVE_OPTION) {
@@ -123,21 +183,21 @@ public class UI extends JFrame implements ActionListener {
                     BufferedWriter out = new BufferedWriter(new FileWriter(file.getPath()));
                     out.write(textArea.getText());
                     out.close();
-                } catch (Exception ex) {
+                } catch (IOException ex) {
                     System.out.println(ex.getMessage());
                 }
             }
-        } else if (e.getSource() == find) {
+        } else if (e.getSource() == find || e.getSource() == quickButton) {
             new Find(textArea);
-        } else if (e.getSource() == close) {
+        } else if (e.getSource() == close || e.getSource() == closeButton) {
             this.dispose();
-        } else if (e.getSource() == aboutMe) {
+        } else if (e.getSource() == aboutMe || e.getSource() == aboutMeButton) {
             new About().me();
-        } else if (e.getSource() == aboutApp) {
+        } else if (e.getSource() == aboutApp || e.getSource() == aboutButton) {
             new About().software();
-        } else if (e.getSource() == clearFile) {
+        } else if (e.getSource() == clearFile || e.getSource() == clearButton) {
             FEdit.clear(textArea);
-        } else if (e.getSource() == newFile) {
+        } else if (e.getSource() == newFile || e.getSource() == newButton) {
             FEdit.clear(textArea);
         }
 
