@@ -8,6 +8,7 @@ import jv.model.DocumentModel;
 import jv.util.Constants;
 import jv.util.ResourceManager;
 import jv.components.LineNumberComponent;
+import jv.components.StatusBar;
 import jv.components.UIMenuBar;
 import jv.components.UIToolBar;
 
@@ -35,6 +36,7 @@ public class UI extends JFrame {
 
     // UI Components
     private final JTextArea textArea;
+    private final StatusBar statusBar;
 
     // Actions
     private FileActions.NewFileAction newFileAction;
@@ -64,6 +66,7 @@ public class UI extends JFrame {
         textArea = new JTextArea("", 0, 0);
         textArea.setFont(
                 new Font(Constants.DEFAULT_FONT_NAME, Constants.DEFAULT_FONT_STYLE, Constants.DEFAULT_FONT_SIZE));
+        statusBar = new StatusBar();
 
         // Setup the UI
         initializeFrame();
@@ -73,9 +76,11 @@ public class UI extends JFrame {
         
         setJMenuBar(new UIMenuBar(this, newFileAction, openFileAction, saveFileAction, closeAction, undoAction, redoAction, clearAction, findAction));
         add(new UIToolBar(this, newFileAction, openFileAction, saveFileAction, closeAction, undoAction, redoAction, clearAction, findAction), BorderLayout.NORTH);
+        add(statusBar, BorderLayout.SOUTH);
         
         setupTextArea();
         setupListeners();
+        updateStatusBar();
     }
 
     /**
@@ -153,6 +158,7 @@ public class UI extends JFrame {
             private void updateDocumentState() {
                 documentModel.setText(textArea.getText(), true);
                 setTitle(documentModel.getWindowTitle());
+                updateStatusBar();
             }
         });
 
@@ -178,5 +184,13 @@ public class UI extends JFrame {
         } finally {
             isLoading = false;
         }
+    }
+
+    /**
+     * Updates the status bar with current file and document information.
+     */
+    public void updateStatusBar() {
+        int lineCount = textArea.getLineCount();
+        statusBar.updateStatus(documentModel.getCurrentFile(), documentModel.isModified(), lineCount);
     }
 }

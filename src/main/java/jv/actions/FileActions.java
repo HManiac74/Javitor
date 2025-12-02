@@ -42,6 +42,9 @@ public class FileActions {
                 if (parent instanceof JFrame) {
                     ((JFrame) parent).setTitle(model.getWindowTitle());
                 }
+                if (parent instanceof UI) {
+                    ((UI) parent).updateStatusBar();
+                }
             }
         }
     }
@@ -75,6 +78,9 @@ public class FileActions {
                     if (parent instanceof JFrame) {
                         ((JFrame) parent).setTitle(model.getWindowTitle());
                     }
+                    if (parent instanceof UI) {
+                        ((UI) parent).updateStatusBar();
+                    }
                 }
             }
         }
@@ -100,6 +106,9 @@ public class FileActions {
             if (fileManager.saveFile(parent, model)) {
                 if (parent instanceof JFrame) {
                     ((JFrame) parent).setTitle(model.getWindowTitle());
+                }
+                if (parent instanceof UI) {
+                    ((UI) parent).updateStatusBar();
                 }
             }
         }
