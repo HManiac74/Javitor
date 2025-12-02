@@ -1,5 +1,6 @@
 package jv.actions;
 
+import jv.UI;
 import jv.controller.FileManager;
 import jv.model.DocumentModel;
 
@@ -33,7 +34,11 @@ public class FileActions {
         public void actionPerformed(ActionEvent e) {
             if (fileManager.checkUnsavedChanges(parent, model)) {
                 model.clear();
-                textArea.setText("");
+                if (parent instanceof UI) {
+                    ((UI) parent).loadContent("");
+                } else {
+                    textArea.setText("");
+                }
                 if (parent instanceof JFrame) {
                     ((JFrame) parent).setTitle(model.getWindowTitle());
                 }
@@ -62,7 +67,11 @@ public class FileActions {
         public void actionPerformed(ActionEvent e) {
             if (fileManager.checkUnsavedChanges(parent, model)) {
                 if (fileManager.openFile(parent, model)) {
-                    textArea.setText(model.getText());
+                    if (parent instanceof UI) {
+                        ((UI) parent).loadContent(model.getText());
+                    } else {
+                        textArea.setText(model.getText());
+                    }
                     if (parent instanceof JFrame) {
                         ((JFrame) parent).setTitle(model.getWindowTitle());
                     }

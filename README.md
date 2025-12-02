@@ -31,6 +31,7 @@ A lightweight, feature-rich text editor built with Java Swing, following modern 
 - ✂️ **Edit Operations**: Clear text area, undo/redo with full history
 - 💾 **Unsaved Changes Detection**: Automatic tracking with confirmation dialogs
 - 📜 **Scrollable Text Area**: Full scroll support for large documents
+- 🔢 **Line Numbers**: Automatic line numbering for better code navigation
 
 ### User Experience
 - ⌨️ **Keyboard Shortcuts**: 
@@ -237,7 +238,7 @@ Contributions are welcome! Here's how you can help:
 
 - [x] Add undo/redo functionality
 - [ ] Implement syntax highlighting
-- [ ] Add line numbers
+- [x] Add line numbers
 - [ ] Create recent files menu
 - [ ] Add print support
 - [ ] Implement themes/dark mode
@@ -283,6 +284,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - ✅ Memory leak fixes
 - ✅ Action-based UI architecture
 - ✅ Updated to Java 21
+- ✅ Added Line Numbers feature
 
 ---
 
