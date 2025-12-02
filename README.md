@@ -32,6 +32,7 @@ A lightweight, feature-rich text editor built with Java Swing, following modern 
 - 💾 **Unsaved Changes Detection**: Automatic tracking with confirmation dialogs
 - 📜 **Scrollable Text Area**: Full scroll support for large documents
 - 🔢 **Line Numbers**: Automatic line numbering for better code navigation
+- 📊 **Status Bar**: Real-time display of file name, type, and line count
 
 ### User Experience
 - ⌨️ **Keyboard Shortcuts**: 
@@ -44,7 +45,8 @@ A lightweight, feature-rich text editor built with Java Swing, following modern 
   - `Ctrl+K` - Clear
   - `Ctrl+F4` - Close
 - 🎨 **Icon-based Toolbar**: Quick access to common operations
-- 📊 **Dynamic Window Title**: Shows filename and modification status
+- 📊 **Dynamic Window Title**: Shows filename and modification status (*)
+- 📍 **Status Bar**: Shows current file info and dirty state indicator
 - ⚠️ **Error Handling**: User-friendly error dialogs with helpful messages
 - 🔄 **Dialog Reuse**: Efficient memory management for find dialog
 
@@ -104,6 +106,12 @@ jv/
 │   ├── FileActions.java         # File operation actions
 │   ├── EditActions.java         # Edit operation actions
 │   └── FindActions.java         # Search operation actions
+│
+├── components/
+│   ├── LineNumberComponent.java # Line number display
+│   ├── StatusBar.java           # Status bar component
+│   ├── UIMenuBar.java           # Menu bar component
+│   └── UIToolBar.java           # Toolbar component
 │
 └── util/
     ├── Constants.java           # Application constants
@@ -285,6 +293,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - ✅ Action-based UI architecture
 - ✅ Updated to Java 21
 - ✅ Added Line Numbers feature
+- ✅ Added Status Bar with file info display
+- ✅ Refactored UI components (MenuBar, ToolBar)
 
 ---
 
