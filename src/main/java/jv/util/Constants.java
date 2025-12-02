@@ -17,8 +17,8 @@ public class Constants {
     public static final int DEFAULT_FONT_STYLE = java.awt.Font.BOLD;
     public static final int DEFAULT_FONT_SIZE = 12;
 
-    public static final int DEFAULT_WINDOW_WIDTH = 500;
-    public static final int DEFAULT_WINDOW_HEIGHT = 300;
+    public static final int DEFAULT_WINDOW_WIDTH = 1000;
+    public static final int DEFAULT_WINDOW_HEIGHT = 700;
 
     // Window titles
     public static final String TITLE_UNTITLED = "Untitled - " + APP_NAME;
