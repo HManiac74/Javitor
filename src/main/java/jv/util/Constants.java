@@ -33,6 +33,8 @@ public class Constants {
     public static final String ICON_FIND = "icons/find.png";
     public static final String ICON_ABOUT_ME = "icons/about_me.png";
     public static final String ICON_ABOUT = "icons/about.png";
+    public static final String ICON_UNDO = "icons/undo.png";
+    public static final String ICON_REDO = "icons/redo.png";
 
     // Menu labels
     public static final String MENU_FILE = "File";
@@ -45,6 +47,8 @@ public class Constants {
     public static final String MENU_ITEM_SAVE = "Save";
     public static final String MENU_ITEM_CLOSE = "Close";
     public static final String MENU_ITEM_CLEAR = "Clear";
+    public static final String MENU_ITEM_UNDO = "Undo";
+    public static final String MENU_ITEM_REDO = "Redo";
     public static final String MENU_ITEM_FIND = "Find";
     public static final String MENU_ITEM_ABOUT_AUTHOR = "About the author";
     public static final String MENU_ITEM_ABOUT_SOFTWARE = "About the software";
@@ -54,6 +58,8 @@ public class Constants {
     public static final String TOOLTIP_OPEN = "Open";
     public static final String TOOLTIP_SAVE = "Save";
     public static final String TOOLTIP_CLEAR = "Clear All";
+    public static final String TOOLTIP_UNDO = "Undo";
+    public static final String TOOLTIP_REDO = "Redo";
     public static final String TOOLTIP_FIND = "Find";
     public static final String TOOLTIP_ABOUT_ME = "About Me";
     public static final String TOOLTIP_ABOUT_SOFTWARE = "About The Software";
@@ -79,6 +85,8 @@ public class Constants {
     public static final String ACTION_SAVE = "save";
     public static final String ACTION_CLOSE = "close";
     public static final String ACTION_CLEAR = "clear";
+    public static final String ACTION_UNDO = "undo";
+    public static final String ACTION_REDO = "redo";
     public static final String ACTION_FIND = "find";
     public static final String ACTION_ABOUT_AUTHOR = "about-author";
     public static final String ACTION_ABOUT_SOFTWARE = "about-software";

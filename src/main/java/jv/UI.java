@@ -11,6 +11,7 @@ import jv.util.ResourceManager;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -39,12 +40,20 @@ public class UI extends JFrame {
     private FileActions.SaveFileAction saveFileAction;
     private FileActions.CloseAction closeAction;
     private EditActions.ClearAction clearAction;
+    private EditActions.UndoAction undoAction;
+    private EditActions.RedoAction redoAction;
     private FindActions.FindAction findAction;
+
+    // Undo Manager
+    private final UndoManager undoManager;
 
     public UI() {
         // Initialize model and controllers
         documentModel = new DocumentModel();
         fileManager = new FileManager();
+
+        // Initialize undo manager
+        undoManager = new UndoManager();
 
         // Initialize UI components
         textArea = new JTextArea("", 0, 0);
@@ -56,6 +65,7 @@ public class UI extends JFrame {
         // Setup the UI
         initializeFrame();
         initializeActions();
+        setupUndoManager();
         setupMenuBar();
         setupToolBar();
         setupTextArea();
@@ -81,6 +91,8 @@ public class UI extends JFrame {
         saveFileAction = new FileActions.SaveFileAction(this, documentModel, fileManager);
         closeAction = new FileActions.CloseAction(this, documentModel, fileManager);
         clearAction = new EditActions.ClearAction(this, documentModel, textArea);
+        undoAction = new EditActions.UndoAction(undoManager);
+        redoAction = new EditActions.RedoAction(undoManager);
         findAction = new FindActions.FindAction(this, textArea);
     }
 
@@ -108,8 +120,15 @@ public class UI extends JFrame {
 
         // Edit menu
         JMenu menuEdit = new JMenu(Constants.MENU_EDIT);
+        JMenuItem undo = createMenuItem(Constants.MENU_ITEM_UNDO, undoAction,
+                ResourceManager.getIcon(Constants.ICON_UNDO), KeyEvent.VK_Z);
+        JMenuItem redo = createMenuItem(Constants.MENU_ITEM_REDO, redoAction,
+                ResourceManager.getIcon(Constants.ICON_REDO), KeyEvent.VK_Y);
         JMenuItem clearFile = createMenuItem(Constants.MENU_ITEM_CLEAR, clearAction,
                 ResourceManager.getIcon(Constants.ICON_CLEAR), KeyEvent.VK_K);
+        menuEdit.add(undo);
+        menuEdit.add(redo);
+        menuEdit.addSeparator();
         menuEdit.add(clearFile);
 
         // Find menu
@@ -168,6 +187,12 @@ public class UI extends JFrame {
         addToolbarButton(Constants.TOOLTIP_SAVE, ResourceManager.getIcon(Constants.ICON_SAVE), saveFileAction);
         mainToolbar.addSeparator();
 
+        addToolbarButton(Constants.TOOLTIP_UNDO, ResourceManager.getIcon(Constants.ICON_UNDO), undoAction);
+        mainToolbar.addSeparator();
+
+        addToolbarButton(Constants.TOOLTIP_REDO, ResourceManager.getIcon(Constants.ICON_REDO), redoAction);
+        mainToolbar.addSeparator();
+
         addToolbarButton(Constants.TOOLTIP_CLEAR, ResourceManager.getIcon(Constants.ICON_CLEAR), clearAction);
         mainToolbar.addSeparator();
 
@@ -201,6 +226,9 @@ public class UI extends JFrame {
             button.setIcon(icon);
         }
         button.setToolTipText(tooltip);
+        // Prevent button from expanding
+        Dimension size = button.getPreferredSize();
+        button.setMaximumSize(size);
         mainToolbar.add(button);
     }
 
@@ -211,6 +239,9 @@ public class UI extends JFrame {
         JButton button = new JButton(icon);
         button.setToolTipText(tooltip);
         button.addActionListener(listener);
+        // Prevent button from expanding
+        Dimension size = button.getPreferredSize();
+        button.setMaximumSize(size);
         mainToolbar.add(button);
     }
 
@@ -223,6 +254,13 @@ public class UI extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
+    }
+
+    /**
+     * Sets up the undo manager and attaches it to the text area's document.
+     */
+    private void setupUndoManager() {
+        textArea.getDocument().addUndoableEditListener(undoManager);
     }
 
     /**

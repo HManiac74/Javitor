@@ -3,11 +3,12 @@ package jv.actions;
 import jv.model.DocumentModel;
 
 import javax.swing.*;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Swing Actions for edit operations (Clear, etc.).
+ * Swing Actions for edit operations (Clear, Undo, Redo, etc.).
  */
 public class EditActions {
 
@@ -35,4 +36,43 @@ public class EditActions {
             }
         }
     }
+
+    /**
+     * Action to undo the last change.
+     */
+    public static class UndoAction extends AbstractAction {
+        private final UndoManager undoManager;
+
+        public UndoAction(UndoManager undoManager) {
+            super("Undo");
+            this.undoManager = undoManager;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (undoManager.canUndo()) {
+                undoManager.undo();
+            }
+        }
+    }
+
+    /**
+     * Action to redo the last undone change.
+     */
+    public static class RedoAction extends AbstractAction {
+        private final UndoManager undoManager;
+
+        public RedoAction(UndoManager undoManager) {
+            super("Redo");
+            this.undoManager = undoManager;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (undoManager.canRedo()) {
+                undoManager.redo();
+            }
+        }
+    }
 }
+

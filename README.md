@@ -3,7 +3,7 @@
 A lightweight, feature-rich text editor built with Java Swing, following modern software architecture principles and best practices.
 
 ![Version](https://img.shields.io/badge/version-1.0-blue.svg)
-![Java](https://img.shields.io/badge/java-8%2B-orange.svg)
+![Java](https://img.shields.io/badge/java-21-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 ---
@@ -28,7 +28,7 @@ A lightweight, feature-rich text editor built with Java Swing, following modern 
 ### Core Functionality
 - 📄 **File Operations**: New, Open, Save with UTF-8 encoding support
 - 🔍 **Find & Replace**: Case-insensitive search with replace all functionality
-- ✂️ **Edit Operations**: Clear text area with keyboard shortcuts
+- ✂️ **Edit Operations**: Clear text area, undo/redo with full history
 - 💾 **Unsaved Changes Detection**: Automatic tracking with confirmation dialogs
 - 📜 **Scrollable Text Area**: Full scroll support for large documents
 
@@ -38,6 +38,8 @@ A lightweight, feature-rich text editor built with Java Swing, following modern 
   - `Ctrl+O` - Open file
   - `Ctrl+S` - Save file
   - `Ctrl+F` - Find
+  - `Ctrl+Z` - Undo
+  - `Ctrl+Y` - Redo
   - `Ctrl+K` - Clear
   - `Ctrl+F4` - Close
 - 🎨 **Icon-based Toolbar**: Quick access to common operations
@@ -233,7 +235,7 @@ Contributions are welcome! Here's how you can help:
 
 ### Areas for Improvement
 
-- [ ] Add undo/redo functionality
+- [x] Add undo/redo functionality
 - [ ] Implement syntax highlighting
 - [ ] Add line numbers
 - [ ] Create recent files menu
@@ -273,12 +275,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### Version 1.0 (Current)
 - ✅ Complete refactoring with MVC architecture
 - ✅ Modern Java practices (NIO, lambdas, try-with-resources)
+- ✅ Undo/redo functionality with keyboard shortcuts
 - ✅ Unsaved changes detection
 - ✅ Scrollable text area
 - ✅ Improved error handling
 - ✅ Resource management with caching
 - ✅ Memory leak fixes
 - ✅ Action-based UI architecture
+- ✅ Updated to Java 21
 
 ---
 
