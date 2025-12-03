@@ -1,7 +1,6 @@
 package jv.components;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
@@ -12,7 +11,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
-import javax.swing.text.Utilities;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -32,12 +30,8 @@ public class LineNumberComponent extends JComponent
     private static final int RIGHT_PADDING = 5;
 
     private final JTextComponent component;
-    private final FontMetrics fontMetrics;
-    private final int lineHeight;
-    private final int charWidth;
     private final int maxDigits;
     private int lastDigits;
-    private int lastLine;
 
     /**
      * Constructs a new LineNumberComponent for the given JTextComponent.
@@ -46,22 +40,18 @@ public class LineNumberComponent extends JComponent
      */
     public LineNumberComponent(JTextComponent component) {
         this.component = component;
-        this.fontMetrics = component.getFontMetrics(component.getFont());
-        this.lineHeight = fontMetrics.getHeight();
-        this.charWidth = fontMetrics.charWidth('0');
         this.maxDigits = 3;
         this.lastDigits = 0;
-        this.lastLine = -1;
 
         component.getDocument().addDocumentListener(this);
         component.addCaretListener(this);
         component.addPropertyChangeListener("font", this);
         component.addComponentListener(this);
-        
+
         setBorder(new CompoundBorder(
                 new MatteBorder(0, 0, 0, 1, Color.GRAY),
                 new EmptyBorder(0, LEFT_PADDING, 0, RIGHT_PADDING)));
-        
+
         setForeground(Color.GRAY);
         setBackground(Color.WHITE);
         setOpaque(true);
@@ -71,8 +61,10 @@ public class LineNumberComponent extends JComponent
      * Updates the preferred size of the component based on the number of lines.
      */
     private void updateSize() {
-        int digits = Math.max(String.valueOf(component.getDocument().getDefaultRootElement().getElementCount()).length(), 3);
-        
+        int digits = Math
+                .max(String.valueOf(component.getDocument().getDefaultRootElement().getElementCount()).length(),
+                        maxDigits);
+
         if (digits != lastDigits || component.getHeight() != getHeight()) {
             lastDigits = digits;
             FontMetrics fm = getFontMetrics(getFont());
@@ -86,25 +78,25 @@ public class LineNumberComponent extends JComponent
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         Font font = component.getFont();
         g.setFont(font);
-        
+
         FontMetrics fm = getFontMetrics(font);
-        int fontHeight = fm.getHeight();
         int fontAscent = fm.getAscent();
-        
+
         Rectangle clip = g.getClipBounds();
-        int startOffset = component.viewToModel(new Point(0, clip.y));
-        int endOffset = component.viewToModel(new Point(0, clip.y + clip.height));
-        
+        int startOffset = component.viewToModel2D(new Point(0, clip.y));
+        int endOffset = component.viewToModel2D(new Point(0, clip.y + clip.height));
+
         while (startOffset <= endOffset) {
             try {
                 String text = component.getText(startOffset, endOffset - startOffset);
                 if (text.indexOf('\n') != -1) {
-                    // If we have newlines, we might need to be careful, but viewToModel usually handles this.
+                    // If we have newlines, we might need to be careful, but viewToModel usually
+                    // handles this.
                     // Actually, simpler approach: iterate through lines.
-                    break; 
+                    break;
                 }
             } catch (BadLocationException e) {
                 break;
@@ -116,19 +108,19 @@ public class LineNumberComponent extends JComponent
         Element root = component.getDocument().getDefaultRootElement();
         int startLine = root.getElementIndex(startOffset);
         int endLine = root.getElementIndex(endOffset);
-        
+
         for (int i = startLine; i <= endLine; i++) {
             Element line = root.getElement(i);
             int lineStartOffset = line.getStartOffset();
-            
+
             try {
-                Rectangle r = component.modelToView(lineStartOffset);
+                Rectangle r = component.modelToView2D(lineStartOffset).getBounds();
                 if (r != null) {
                     String lineNumber = String.valueOf(i + 1);
                     int stringWidth = fm.stringWidth(lineNumber);
                     int x = getWidth() - stringWidth - RIGHT_PADDING - 2; // -2 for border
                     int y = r.y + fontAscent;
-                    
+
                     g.drawString(lineNumber, x, y);
                 }
             } catch (BadLocationException e) {

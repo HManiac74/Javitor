@@ -6,7 +6,6 @@ import jv.actions.FindActions;
 import jv.controller.FileManager;
 import jv.model.DocumentModel;
 import jv.util.Constants;
-import jv.util.ResourceManager;
 import jv.components.LineNumberComponent;
 import jv.components.StatusBar;
 import jv.components.UIMenuBar;
@@ -17,8 +16,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -50,7 +47,7 @@ public class UI extends JFrame {
 
     // Undo Manager
     private final UndoManager undoManager;
-    
+
     // State flags
     private boolean isLoading = false;
 
@@ -73,11 +70,13 @@ public class UI extends JFrame {
         initializeActions();
         setupUndoManager();
         setupUndoManager();
-        
-        setJMenuBar(new UIMenuBar(this, newFileAction, openFileAction, saveFileAction, closeAction, undoAction, redoAction, clearAction, findAction));
-        add(new UIToolBar(this, newFileAction, openFileAction, saveFileAction, closeAction, undoAction, redoAction, clearAction, findAction), BorderLayout.NORTH);
+
+        setJMenuBar(new UIMenuBar(this, newFileAction, openFileAction, saveFileAction, closeAction, undoAction,
+                redoAction, clearAction, findAction));
+        add(new UIToolBar(this, newFileAction, openFileAction, saveFileAction, closeAction, undoAction, redoAction,
+                clearAction, findAction), BorderLayout.NORTH);
         add(statusBar, BorderLayout.SOUTH);
-        
+
         setupTextArea();
         setupListeners();
         updateStatusBar();
@@ -107,10 +106,6 @@ public class UI extends JFrame {
         findAction = new FindActions.FindAction(this, textArea);
     }
 
-
-
-
-
     /**
      * Sets up the text area with scroll pane.
      */
@@ -119,11 +114,11 @@ public class UI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        
+
         // Add line numbers
         LineNumberComponent lineNumberComponent = new LineNumberComponent(textArea);
         scrollPane.setRowHeaderView(lineNumberComponent);
-        
+
         getContentPane().add(scrollPane, BorderLayout.CENTER);
     }
 
@@ -142,17 +137,20 @@ public class UI extends JFrame {
         textArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                if (!isLoading) updateDocumentState();
+                if (!isLoading)
+                    updateDocumentState();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                if (!isLoading) updateDocumentState();
+                if (!isLoading)
+                    updateDocumentState();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                if (!isLoading) updateDocumentState();
+                if (!isLoading)
+                    updateDocumentState();
             }
 
             private void updateDocumentState() {
@@ -172,7 +170,8 @@ public class UI extends JFrame {
     }
 
     /**
-     * Loads content into the text area without triggering the modification listener.
+     * Loads content into the text area without triggering the modification
+     * listener.
      * 
      * @param text The text to load
      */
